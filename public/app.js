@@ -1,28 +1,40 @@
 function loadContent() {
-    console.log('hash value:', window.location.hash);
     var pageName = window.location.hash.substr(1);
-    console.log('page name:', pageName);
-
+    
     if (!pageName.trim().length) {
-        pagename = 'home';
+        pageName = 'home';
     }
 
     getContent(pageName, function(htmlfromFiles) {
         const contentDiv = document.getElementById('contentDiv');
-        contentDiv.innerHTML = htmlfromFiles;    
+        contentDiv.innerHTML = htmlfromFiles;
     });
 
 };
 
 
-function getContent(pagename, someFunction) {
+function getContent(pageName, someFunction) {
     const request = new XMLHttpRequest();
 
     request.addEventListener('load', function() {
         someFunction(request.responseText);
     })
 
-    var url = "public/" + pagename + '.html';
+    var url;
+    switch(pageName) {
+        case 'home':
+        case 'about':
+        case 'contact':
+            url = "public/"+ pageName +".html";
+            break;
+        case 'empList':
+            url = "public/emp/list/empList.html";
+            break;
+        case 'empAdd':
+            url = "public/emp/create/empAdd.html";
+            break;
+    }
+
     request.open('GET', url);
     request.send({});
 }

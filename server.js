@@ -11,7 +11,7 @@ app.get('/', function(req, res) {
 });
 
 app.listen(port, function() {
-    console.log('request received');
 });
 
+console.log('Plase goto http://localhost:3000 to access this app');
 console.log('js-spa is listening on port :', port);
