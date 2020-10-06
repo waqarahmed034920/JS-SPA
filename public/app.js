@@ -14,12 +14,6 @@ function loadContent() {
 
 
 function getContent(pageName, someFunction) {
-    const request = new XMLHttpRequest();
-
-    request.addEventListener('load', function() {
-        someFunction(request.responseText);
-    })
-
     var url;
     switch(pageName) {
         case 'home':
@@ -35,6 +29,11 @@ function getContent(pageName, someFunction) {
             break;
     }
 
+    const request = new XMLHttpRequest();
+    request.addEventListener('load', function() {
+        console.log('yea wali html:', request.responseText);
+        someFunction(request.responseText);
+    })
     request.open('GET', url);
     request.send({});
 }
